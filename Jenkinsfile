@@ -3,16 +3,17 @@ pipeline {
     
     stages {
 	
-	stage('Install'){
-		steps { 
-		    sh 'npm ci'	
+		stage('Install'){
+			steps { 
+		    	sh 'npm ci'	
 			}
 		}
+
+		stage('Test'){
+	    	steps { 
+				sh 'npm test'
+	    	}      
+    	}
 	}
-	stage('Test'){
-	    steps{ 
-		sh 'npm test'
-	}      
-}
-	}
+	
 }

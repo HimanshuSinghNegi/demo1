@@ -13,10 +13,11 @@ pipeline {
 	    	steps { 
 			sh 'npm test'
 	    	}
+
 		stage('Docker'){
-		steps{
+		steps	{
 			sh 'sudo docker build -t node-demo .'
-		}
+			}
 		}      
     	}
 	}

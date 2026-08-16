@@ -11,8 +11,13 @@ pipeline {
 
 		stage('Test'){
 	    	steps { 
-				sh 'npm test'
-	    	}      
+			sh 'npm test'
+	    	}
+		stage('Docker'){
+		steps{
+			sh 'sudo docker build -t node-demo .'
+		}
+		}      
     	}
 	}
 	

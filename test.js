@@ -6,4 +6,4 @@ if (result !== 5) {
     throw new Error("Test failed");
 }
 
-console.log("All tests passed!");
+console.log("All tests passed! 1");

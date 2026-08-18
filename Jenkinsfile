@@ -20,15 +20,6 @@ pipeline {
                 sh 'sudo docker build -t node-demo .'
             }
         }
-    }
-}
 
-		stage('Docker'){
-		steps	{
-			sh 'sudo docker build -t node-demo .'
-			}
-		}      
-    	}
-	}
-	
+    }
 }

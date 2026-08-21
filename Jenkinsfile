@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-     DOCKER_REPOX = 'himanshu12negi/himanshusinghnegi'
+     DOCKER_REPO = 'himanshu12negi/himanshusinghnegi'
     }
 
     stages {

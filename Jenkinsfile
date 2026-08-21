@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-     DOCKER_IMAGE = 'himanshu12negi/himanshusinghnegi:latest'
+     DOCKER_IMAGE = 'himanshu12negi/himanshusinghnegi'
     }
 
     stages {
@@ -17,6 +17,19 @@ pipeline {
             steps {
                 sh 'npm test'
             }
+        }
+	
+	stage('Set Image Tag'){
+           steps {
+               script {   
+                     env.IMAGE_TAG = sh(
+		         script: 'git rev-parse --short HEAD',
+		     	 returnStdout:  true
+                     ).trim()
+		    env.DOCKER_IMAGE = "${env.DOCKER_REPO}:${ENV.IMAGE_TAG}"
+		    echo "Docker images: ${env.DOCKER_IMAGE}" 
+              }
+           }
         }
 
         stage('Docker') {
@@ -46,6 +59,8 @@ pipeline {
 	stage('Deploy'){
 	     steps{
 	      sh ''' 
+		 docker pull "$DOCKER_IMAGE"
+
      		 docker stop demo-app || true 
 		 docker rm demo-app || true
 		

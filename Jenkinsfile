@@ -3,6 +3,7 @@ pipeline {
     
     environment {
      DOCKER_IMAGE = 'himanshu12negi/himanshusinghnegi'
+     IMAGE_TAG = '';
     }
 
     stages {

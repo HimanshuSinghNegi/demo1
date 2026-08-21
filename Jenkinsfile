@@ -19,18 +19,27 @@ pipeline {
             }
         }
 	
-	stage('Set Image Tag'){
-           steps {
-               script {   
-                     env.IMAGE_TAG = sh(
-		         script: 'git rev-parse --short HEAD',
-		         returnStdout:  true
-                     ).trim()
-		    env.DOCKER_IMAGE = "${env.DOCKER_REPO}:${env.IMAGE_TAG}"
-		    echo "Docker images: ${env.DOCKER_IMAGE}" 
-              }
-           }
+	stage('Set Image Tag') {
+    steps {
+        script {
+            sh 'git status'
+            sh 'git rev-parse HEAD'
+            sh 'git rev-parse --short HEAD'
+
+            env.IMAGE_TAG = sh(
+                script: 'git rev-parse --short HEAD',
+                returnStdout: true
+            ).trim()
+
+            echo "IMAGE_TAG = [${env.IMAGE_TAG}]"
+            echo "GIT_COMMIT = [${env.GIT_COMMIT}]"
+
+            env.DOCKER_IMAGE = "${env.DOCKER_REPO}:${env.IMAGE_TAG}"
+
+            echo "DOCKER_IMAGE = [${env.DOCKER_IMAGE}]"
         }
+    }
+}
 
         stage('Docker') {
             steps {

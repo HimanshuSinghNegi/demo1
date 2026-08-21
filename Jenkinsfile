@@ -2,8 +2,7 @@ pipeline {
     agent any
     
     environment {
-     DOCKER_IMAGE = 'himanshu12negi/himanshusinghnegi'
-     IMAGE_TAG = '';
+     DOCKER_REPOX = 'himanshu12negi/himanshusinghnegi'
     }
 
     stages {

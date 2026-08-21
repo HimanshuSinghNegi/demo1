@@ -24,9 +24,9 @@ pipeline {
                script {   
                      env.IMAGE_TAG = sh(
 		         script: 'git rev-parse --short HEAD',
-		     	 returnStdout:  true
+		         returnStdout:  true
                      ).trim()
-		    env.DOCKER_IMAGE = "${env.DOCKER_REPO}:${ENV.IMAGE_TAG}"
+		    env.DOCKER_IMAGE = "${env.DOCKER_REPO}:${env.IMAGE_TAG}"
 		    echo "Docker images: ${env.DOCKER_IMAGE}" 
               }
            }

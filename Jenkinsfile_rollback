@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(
+            name: 'IMAGE_TAG',
+            defaultValue: '',
+            description: 'Docker image tag to deploy, for example a11ab83'
+        )
+    }
+
+    environment {
+        DOCKER_REPO = 'himanshu12negi/himanshusinghnegi'
+    }
+
+    stages {
+
+        stage('Validate') {
+            steps {
+                script {
+                    if (!params.IMAGE_TAG?.trim()) {
+                        error('IMAGE_TAG cannot be empty')
+                    }
+
+                    echo "Rollback image: ${env.DOCKER_REPO}:${params.IMAGE_TAG}"
+                }
+            }
+        }
+
+        stage('Pull Image') {
+            steps {
+                sh '''
+                    docker pull "$DOCKER_REPO:$IMAGE_TAG"
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker stop demo-app || true
+                    docker rm demo-app || true
+
+                    docker run -d \
+                        --name demo-app \
+                        -p 3000:3000 \
+                        "$DOCKER_REPO:$IMAGE_TAG"
+                '''
+            }
+        }
+    }
+}

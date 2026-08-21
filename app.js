@@ -10,4 +10,4 @@ function add(a, b) {
     return a + b;
 }
 
-module.exports = { app };
+module.exports = { app, add };

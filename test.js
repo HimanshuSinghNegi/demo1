@@ -1,8 +1,8 @@
 const { add } = require("./app");
 
-const result = add(2, 3);
+const result = add(12, 3);
 
-if (result !== 5) {
+if (result !== 15) {
     throw new Error("Test failed");
 }
 

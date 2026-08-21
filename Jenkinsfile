@@ -43,6 +43,16 @@ pipeline {
                 }
             }
 	}
+	stage('Deploy'){
+	     steps{
+	      sh ... 
+     		 docker stop demo-app || true 
+		 docker rm demo-app || true
+		
+		 docker run -d --name demo-app -p 3000:3000 "$DOCKER_IMAGE" 
+		...  
+	     }
+	}
 
     }
 }

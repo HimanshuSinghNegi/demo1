@@ -22,9 +22,7 @@ pipeline {
     steps {
         sshagent(['aws-ec2-ssh']) {
             sh '''
-                ssh -o StrictHostKeyChecking=no \
-                    ubuntu@13.203.216.98 \
-                    "ip-10-0-1-203"
+                ssh -o StrictHostKeyChecking=no ubuntu@13.203.216.98 "ip-10-0-1-203"
             '''
         }
     }

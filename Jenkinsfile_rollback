@@ -2,11 +2,15 @@ pipeline {
     agent any
 
     parameters {
-        string(
-            name: 'IMAGE_TAG',
-            defaultValue: '',
-            description: 'Docker image tag to deploy, for example a11ab83'
-        )
+	choice(
+    name: 'IMAGE_TAG',
+    choices: [
+        'a11ab83',
+        'b72cd91',
+        'c82fa12'
+    ],
+    description: 'Select image version to deploy'
+)
     }
 
     environment {
